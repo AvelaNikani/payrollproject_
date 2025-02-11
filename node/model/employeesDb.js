@@ -22,16 +22,16 @@ const deleteEmployee = async (employeeId) => {
     return await getEmployees()//allows us to see updated 
 }
 
-const updateEmployee= async (name,position,department,salary,employmentHistory,contact, employeeId) => {
-    await pool.query('UPDATE `EmployeeInformation` SET `name`= ?,`position`= ?,`department`= ?,`salary`= ?,`employmentHistory`= ?,`contact`= ? WHERE `employeeId`= ?',[name,position,department,salary,employmentHistory,contact,employeeId])
-    
-    return await getEmployees()//allows us to see updated 
-}
-// const updateEmployee= async (columnName, value, employeeId) => {
-//     console.log(columnName, value, employeeId);
-//     await pool.query('UPDATE EmployeeInformation SET `+ `?` +`= ? WHERE employeeId= ?',[columnName,value,employeeId])
+// const updateEmployee= async (name,position,department,salary,employmentHistory,contact, employeeId) => {
+//     await pool.query('UPDATE `EmployeeInformation` SET `name`= ?,`position`= ?,`department`= ?,`salary`= ?,`employmentHistory`= ?,`contact`= ? WHERE `employeeId`= ?',[name,position,department,salary,employmentHistory,contact,employeeId])
     
 //     return await getEmployees()//allows us to see updated 
 // }
+const updateEmployee= async (columnName, value, employeeId) => {
+    console.log(columnName, value, employeeId);
+    await pool.query(`UPDATE EmployeeInformation SET ${columnName} = ? WHERE employeeId= ?`,[value,employeeId])
+    
+    return await getEmployees()//allows us to see updated 
+}
 
 export{getEmployees,get1Employee,addNewEmployee,deleteEmployee,updateEmployee} 

@@ -98,18 +98,17 @@
     </div>
     <div>
       <div class="modal-overlay" id="modalOverlay"></div>
-      <div class="modal" id="employeeModal">
-          <h2 class="text-center">Employee Details</h2>
-          <p><strong>Employee no.:</strong> <span id="modalEmployeeId"></span></p>
-          <p><strong>Name:</strong> <span id="modalEmployeeName"></span></p>
-          <p><strong>Department:</strong> <span id="modalEmployeeDepartment"></span></p>
-          <p><strong>Position:</strong> <span id="modalEmployeePosition"></span></p>
+      <div class="modal" id="payslipModal">
+          <h2 class="text-center">Employee Payslip</h2>
+          <p><strong>Employee no.:</strong> <span id="modalPayslipId"></span></p>
+          <p><strong>Name:</strong> <span id="modalPayslipName"></span></p>
+          <p><strong>Position:</strong> <span id="modalPayslipPosition"></span></p>
           <p><strong>Hours Worked:</strong> <span id="modalHoursWorked"></span></p>
           <p><strong>Hourly Rate:</strong> <span id="modalHourlyRate"></span></p>
-          <p><strong>Deductions(Total Leave deduction):</strong> $<span id="modalLeaveDeductions"></span></p>
-          <p><strong>Remuneration(per annum):</strong> $<span id="modalEmployeeSalary"></span></p>
+          <p><strong>Leave Days:</strong> <span id="modalLeaveDeductions"></span></p>
+          <p><strong>Remuneration(per annum):</strong> $<span id="modalPayslipSalary"></span></p>
           <p><strong>Nett Salary(with deductions):</strong> $<span id="modalFinalSalary"></span></p>
-          <button class="btn btn-primary" onclick="closeModal()">Close</button>
+          <button class="btn btn-primary" onclick="closeModal()" >Close</button>
       </div>
 
 
@@ -124,24 +123,23 @@
       async function fetchPayroll() {
           const res = await fetch(api);
           const data = (await res.json()).payslip;
-          console.log(data);
+          // console.log(data);
     
           const table = document.getElementById("tableBody");
-          data.forEach(payslip => 
-          table.innerHTML += 
+          table.innerHTML = data.map(payslip =>
           `
           
               <tr>
                   <td>${payslip.payslip_id}</td>
+                  <td contenteditable="true" onBlur="updateEmployee(${payslip.payslip_id}, 'name', this.innerText)">${payslip.name}</td>
                   <td contenteditable="true" onBlur="updateEmployee(${payslip.payslip_id}, 'position', this.innerText)">${payslip.position}</td>
                   <td contenteditable="true" onBlur="updateEmployee(${payslip.payslip_id}, 'salary', this.innerText)">$ ${payslip.salary}</td>
-                  <td contenteditable="true" onBlur="updateEmployee(${payslip.payslip_id}, 'name', this.innerText)">${payslip.name}</td>
                   <td contenteditable="true" onBlur="updateEmployee(${payslip.payslip_id}, 'hoursWorked', this.innerText)">${payslip.hoursWorked}</td>
                   <td contenteditable="true" onBlur="updateEmployee(${payslip.payslip_id}, 'leaveDeductions', this.innerText)">${payslip.leaveDeductions}</td>
                   <td><button class="btn btn-primary" onclick="generateDigitalSlip(${payslip.payslip_id})">Generate</button></td>
                   <td><button class="btn btn-primary" onclick="deletePayroll(${payslip.payslip_id})">Delete</button></td>
               </tr>
-          `);
+          `).join("");
       };
       fetchPayroll();
       async function addNewPayroll() {
@@ -164,7 +162,7 @@
 
       document.getElementById("name").value = "";
       document.getElementById("position").value = "";
-      document.getElementById("salary").value = "";
+      document.getElementById("salary").value = ""; 
       document.getElementById("hoursWorked").value = "";
       document.getElementById("leaveDeductions").value = "";
       document.getElementById("finalSalary").value = "";
@@ -183,8 +181,8 @@
   addNewPayroll();
   });
       
-  async function updatePayroll(employeeId, field, value) {
-            await fetch(`${api}/${employeeId}`, {
+  async function updatePayroll(payslip_id, field, value) {
+            await fetch(`${api}/${payslip_id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ [field]: value }),
@@ -199,6 +197,8 @@
             }
           }
 
+          fetchPayroll()
+
         // Open modal
         document.getElementById("openModalBtn").addEventListener("click", function() {
             document.getElementById("modalOverlay").classList.add("active");
@@ -210,10 +210,37 @@
             closeModal();
         });
 
-        function closeModal() {
-            document.getElementById("modalOverlay").classList.remove("active");
-            document.getElementById("payrollModal").classList.remove("active");
-        }
+  async function generateDigitalSlip(payslip_id) {
+    try {
+        // Fetch payroll data
+        const payslipResponse = await fetch(`${api}/${payslip_id}`);
+        const {payslip} = await payslipResponse.json();
+        console.log(payslip[0]);
+        
+        // Populate the modal with data
+        document.getElementById("modalPayslipId").textContent = payslip[0].payslip_id;
+        document.getElementById("modalPayslipName").textContent = payslip[0].name;
+        document.getElementById("modalPayslipPosition").textContent = payslip[0].position;
+        document.getElementById("modalHoursWorked").textContent =payslip[0].hoursWorked;
+        document.getElementById("modalHourlyRate").textContent = (payslip[0].salary) /payslip[0].hoursWorked;
+        document.getElementById("modalLeaveDeductions").textContent = payslip[0].salary - payslip[0].finalSalary;
+        document.getElementById("modalPayslipSalary").textContent = (payslip[0].salary) * 12;
+        document.getElementById("modalFinalSalary").textContent =payslip[0].finalSalary;
+
+        // Show the modal and overlay
+        document.getElementById("modalOverlay").classList.add("active");
+        document.getElementById("payslipModal").classList.add("active");
+    } catch (error) {
+        console.error("Error fetching employee data:", error);
+        alert("Failed to retrieve employee information.");
+    }
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("active");
+    document.getElementById("payslipModal").classList.remove("active");
+}
         
      </script>
 </body>

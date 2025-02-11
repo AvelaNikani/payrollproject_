@@ -21,11 +21,16 @@ const deleteEmployeeCon = async (req,res)=> {
 
 const updateEmployeeCon = async (req, res) => {
     let {employeeId} = req.params;
-    let {name,department,position,employmentHistory,contact} = req.body;
-    
+    // let {name,department,position,employmentHistory,contact} = req.body;
+    let value
+    for (const key in req.body) {
+        value = req.body[`${key}`]
+        
+    }
+    console.log(value);
+    await updateEmployee(Object.keys(req.body)[0], value, employeeId)
     const updatedEmployees = await getEmployees(); // Fetch updated data
     res.json(updatedEmployees);
-
 }
 
 

@@ -99,15 +99,15 @@
   async function fetchEmployees() {
       const res = await fetch(api);
       const data = (await res.json()).employeeinformation;
-      console.log(data);
+      // console.log(data);
       
       const table = document.getElementById("tbody");
       table.innerHTML = data.map(EmployeeInformation => `
           <tr>
               <td>${EmployeeInformation.employeeId}</td>
               <td contenteditable="true" onBlur="updateEmployee(${EmployeeInformation.employeeId}, 'name', this.innerText)">${EmployeeInformation.name}</td>
-              <td contenteditable="true" onBlur="updateEmployee(${EmployeeInformation.employeeId}, 'position', this.innerText)">${EmployeeInformation.position}</td>
               <td contenteditable="true" onBlur="updateEmployee(${EmployeeInformation.employeeId}, 'department', this.innerText)">${EmployeeInformation.department}</td>
+              <td contenteditable="true" onBlur="updateEmployee(${EmployeeInformation.employeeId}, 'position', this.innerText)">${EmployeeInformation.position}</td>
               <td contenteditable="true" onBlur="updateEmployee(${EmployeeInformation.employeeId}, 'contact', this.innerText)">${EmployeeInformation.contact}</td>
               <td contenteditable="true" onBlur="updateEmployee(${EmployeeInformation.employeeId}, 'employmentHistory', this.innerText)">${EmployeeInformation.employmentHistory}</td>
               <td>
