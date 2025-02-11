@@ -23,11 +23,25 @@ const deleteEmployee = async (employeeId) => {
     return await getEmployees()//allows us to see updated 
 }
 
+<<<<<<< HEAD
 const updateEmployee= async (name,position,department,salary,employmentHistory,contact, employeeId) => {
     await pool.query('UPDATE `EmployeeInformation` SET `name`= ?,`position`= ?,`department`= ?,`salary`= ?,`employmentHistory`= ?,`contact`= ? WHERE `employeeId`= ?',[name,position,department,salary,employmentHistory,contact,employeeId])
     
     return await getEmployees()//allows us to see updated 
 }
 
+=======
+// const updateEmployee= async (name,position,department,salary,employmentHistory,contact, employeeId) => {
+//     await pool.query('UPDATE `EmployeeInformation` SET `name`= ?,`position`= ?,`department`= ?,`salary`= ?,`employmentHistory`= ?,`contact`= ? WHERE `employeeId`= ?',[name,position,department,salary,employmentHistory,contact,employeeId])
+    
+//     return await getEmployees()//allows us to see updated 
+// }
+const updateEmployee= async (columnName, value, employeeId) => {
+    console.log(columnName, value, employeeId);
+    await pool.query(`UPDATE EmployeeInformation SET ${columnName} = ? WHERE employeeId= ?`,[value,employeeId])
+    
+    return await getEmployees()//allows us to see updated 
+}
+>>>>>>> 2eba6fe1223ce82dbcc2fc20245154e41e9300fe
 
 export{getEmployees,get1Employee,addNewEmployee,deleteEmployee,updateEmployee} 
