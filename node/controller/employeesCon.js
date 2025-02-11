@@ -1,7 +1,8 @@
-import {getEmployees,get1Employee,addNewEmployee,deleteEmployee,updateEmployee} from '../model/employeesDb.js'
+import {getEmployees,get1Employee,addNewEmployee,deleteEmployee,updateEmployee} from '../model/employeesDb.js' ;
 
 const getEmployeesCon = async (req,res)=>{
     res.json({employeeinformation: await getEmployees()})
+    console.log(employeeinformation)
 }
 const get1EmployeeCon = async (req,res)=>{
     res.json({employeeinformation: await get1Employee(req.params.employeeId)})

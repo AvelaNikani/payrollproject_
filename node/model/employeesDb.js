@@ -1,9 +1,10 @@
-import {pool} from '../config/config.js'
+import {pool} from '../config/config.js';
 
 //functions for employees
 const getEmployees = async ()=> {
-    let [data] = await pool.query('SELECT * FROM EmployeeInformation')
+    let [data] = await pool.query('SELECT * FROM EmployeeInformation;')
     return data
+    console.log(data)
 }
 const get1Employee = async (employeeId)=> {
     let [data] = await pool.query('SELECT * FROM EmployeeInformation WHERE employeeId = ?',[employeeId])
@@ -27,11 +28,6 @@ const updateEmployee= async (name,position,department,salary,employmentHistory,c
     
     return await getEmployees()//allows us to see updated 
 }
-// const updateEmployee= async (columnName, value, employeeId) => {
-//     console.log(columnName, value, employeeId);
-//     await pool.query('UPDATE EmployeeInformation SET `+ `?` +`= ? WHERE employeeId= ?',[columnName,value,employeeId])
-    
-//     return await getEmployees()//allows us to see updated 
-// }
+
 
 export{getEmployees,get1Employee,addNewEmployee,deleteEmployee,updateEmployee} 

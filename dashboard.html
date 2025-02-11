@@ -1,90 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/main.css">
+
 </head>
-<body class="dashboard-body">
-    <nav class="navbar" style="background-color: #0095ff;">
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="./dashboard.html" style="font-weight: 1000;"><img src="./img/Screenshot 2024-12-10 134906.png" alt="logo" width="50px" height="50px"> ModernTech Solutions</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 125px; font-weight: 500;">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./dashboard.html" style="color: white;">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./employee.html" style="color: white;">Employee Information</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./payrollcalc.html" style="color: white;">Payroll Simulator</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./attendtimeoff.html" style="color: white;">Attendence/Time Off Requests</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./index.html" style="color:red;">Log Out</a>
-                  </li>
-                
+<body>
+  <!-- navbar starts here  -->
+  <nav class="navbar bg-body-tertiary fixed-top" style="background: linear-gradient(135deg, #405766, #ffffff, #5F7C8A, #ffffff);">
+    <div class="container-fluid">
+
+        <img src="./img/icon.png" style="border: 2px solid #405766;" height="50px" alt="icon">
+        <a class="navbar-brand" href="dashboard.html"> Welcome to the Dashboard</a>
+        
+        <!-- Toggler button for offcanvas menu -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Offcanvas menu content -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">ModernTech Solutions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="dashboard.html">Home</a></li>
+          <!-- Employee Data Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="employeeDropdown" data-bs-toggle="dropdown">
+             Employee Data</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="employee.html">Employee Information</a></li>
+                <li><a class="dropdown-item" href="attendtimeoff.html">Attendance</a></li>
+                <li><a class="dropdown-item" href="payrollcalc.html">Payroll</a></li>
+                <li><a class="dropdown-item" href="Leave.html">Leave</a></li>
+             </ul>
+                    </li>
+                                    
+             <!-- Performance Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="performanceDropdown" data-bs-toggle="dropdown"> Performance
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="performance-form.html">Performance Review Form</a></li>
+                            <li><a class="dropdown-item" href="performance_records.html">Performance Records</a></li>
+                        </ul>
+                         </li>
+                         <li class="nav-item"><a class="nav-link" href="index.html" style="color:red;">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+<!-- Navbar ends here -->
+
+
+   <!-- Video Section -->
+<section class="background-video">
+  <!-- Background video looping with no sound -->
+  <video autoplay muted loop playsinline class="background-clip">
+    <source src="./video/background-clip.mp4" type="video/mp4">
+  </video>
+  <!-- Content overlay on the video -->
+  <div class="content">
+    <h2>Welcome back</h2>
+    <h3>Mia Thompson</h3>
+  </div>
+</section>
+  
+  <main class="parent">
+    <!-- Employee Dashboard Cards -->
+    <!-- <div class="card-container"> -->
+      <!-- Employee Card -->
+      <!-- <section class="employee-card-section">
+        <div class="card-body">
+          <div class="inside-employee-card">
+            <div class="header">
+              <h5>Employee</h5>
+            </div>
+            <div class="card-body">
+              <div class="employee-info">
+                <p><strong>Position:</strong> Software Engineer</p>
+                <p><strong>Department:</strong> Development</p>
               </div>
             </div>
-          </nav>
-    </nav>
-    <main class="parent">
-    <!-- Schedule Section -->
-    <section>
-      <div class="card-body">
-        <div class="inside-schedule-card">
-          <div class="header">
-            <h5 class="card-title">Schedule</h5>
-            <a href="./leave.html" class="see-all">See All</a>
-          </div>
-          <!-- Navigation for months -->
-          <div class="d-flex justify-content-between align-items-center">
-            <button class="btn btn-outline-secondary btn-sm" id="prev-month">&#x2039;</button>
-            <span>Dec, 2024</span>
-            <button class="btn btn-outline-secondary btn-sm" id="next-month">&#x203A;</button>
-          </div>
-          <!-- Calendar Display -->
-          <div class="calender">
-            <div class="d-flex justify-content-around">
-              <div>18</div>
-              <div>19</div>
-              <div class="bg-primary text-white rounded-circle p-2">20</div>
-              <div>21</div>
-              <div>22</div>
+            <div class="card-footer">
+              <a href="#" class="card-link">View Profile</a>
             </div>
           </div>
-          <!-- Search Bar -->
-          <input type="text" class="form-control mt-3" placeholder="Search Schedule">
         </div>
-      </div>
-    </section>
-
-    <!-- Work Attendance Section -->
-    <section class="work-atten">
-      <div class="card-body">
-        <div class="inside-attendance-card">
-          <div class="header">
-            <h5 class="card-title">Work Attendance</h5>
-            <a href="./employee.html" class="see-all">See All</a>
+      </section> -->
+      
+      <!-- Payroll Card -->
+      <!-- <div class="card" onclick="window.location.href='../attendtimeoff.html'">
+        <section class="payroll-card-section">
+          <div class="card-body">
+            <div class="inside-payroll-card">
+              <div class="header">
+                <h5>Payroll Info</h5>
+                <a href="./employee.html" class="see-all">See All</a>
+              </div>
+              <p><strong>Days Worked:</strong> 22</p>
+              <p><strong>Leave Deductions:</strong> 8 days</p>
+              <p><strong>Final Salary:</strong> $69,500</p>
+            </div>
           </div>
-          <p class="card-text">There are 15 employees present and 5 absent today.</p>
-          <!-- Placeholder for attendance chart -->
-          <div class="chart"></div>
+          <div class="card-footer">
+            <a href="#" class="card-link">View Payroll</a>
+          </div>
+        </section>
+      </div> -->
+    
+      <!-- Attendance Card Section -->
+  <section class="attendance-card-section">
+        <div class="card-body">
+          <div class="inside-attendance-card">
+            <div class="header">
+              <h5>Work Attendance</h5>
+              <a href="./attendtimeoff.html" class="see-all">See All</a>
+            </div>
+            <p class="card-text">There are 15 employees present and 5 absent today.</p>
+            <div id="employee-section" class="employee-section">
+              <div class="employee-item">
+                <img src="./img/photo-2.jpg" alt="Sipho Zulu" class="avatar">
+                <div class="employee-info">
+                  <p><strong>Sipho Zulu</strong> <span>💼</span></p>
+                  <p>UI/UX Designer</p>
+                </div>
+                <div class="employee-badge">Absent</div>
+              </div>
+              <div class="employee-item">
+                <img src="./img/photo-4.jpg" alt="Sibongile Nkosi" class="avatar">
+                <div class="employee-info">
+                  <p><strong>Sibongile Nkosi</strong> <span>🌟</span></p>
+                  <p>Software Engineer</p>
+                </div>
+                <div class="employee-badge">Present</div>
+              </div>
+              <div class="employee-item">
+                <img src="./img/photo-3.jpg" alt="Farai Gumbo" class="avatar">
+                <div class="employee-info">
+                  <p><strong>Farai Gumbo</strong> <span>🌟</span></p>
+                  <p>Content Strategist</p>
+                </div>
+                <div class="employee-badge">Present</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-
+</section>
+  
     <!-- Time Off Section -->
-    <section>
+<section>
       <div class="card-body">
         <div class="inside-timeoff-card">
           <div class="header">
@@ -116,24 +190,24 @@
           </div>
         </div>
       </div>
-    </section>
-
+</section>
+  
     <!-- Employee Tracker Section -->
-    <section >
+<section>
       <div class="card-body">
         <div class="inside-employee-card">
           <div class="header">
-            <h5>Employee Tracker</h5>
-            <a href="./employee.html" class="see-all">See All</a>
+            <h5>Attendance Tracker</h5>
+            <a href="attendtimeoff.html" class="see-all">See All</a>
           </div>
         
           <div class="employee-section">
             <h6>Absent</h6>
             <div class="employee-item">
-              <img src="./images/photo-2.jpg" alt="James Brown" class="avatar">
+              <img src="./img/photo-2.jpg" alt="Thabo Molefe" class="avatar">
               <div class="employee-info">
-                <p><strong>James Brown</strong> <span>💼</span></p>
-                <p>Research and Development</p>
+                <p><strong>Thabo Molefe</strong> <span>💼</span></p>
+                <p>Quality Analyst</p>
               </div>
               <div class="employee-badge">Absent</div>
             </div>
@@ -142,40 +216,81 @@
           <div class="employee-section">
             <h6>Away</h6>
             <div class="employee-item">
-              <img src="./images/photo-3.jpg" alt="Sophia Williams" class="avatar">
+              <img src="./img/photo-3.jpg" alt="Keshav Naidoo" class="avatar">
               <div class="employee-info">
-                <p><strong>Sophia Williams</strong> <span>🌟</span></p>
-                <p>Finance</p>
+                <p><strong>Keshav Naidoo</strong> <span>🌟</span></p>
+                <p>Sales Representative</p>
               </div>
               <div class="employee-time">25m</div>
             </div>
         
             <div class="employee-item">
-              <img src="./images/photo-4.jpg" alt="Arthur Taylor" class="avatar">
+              <img src="./img/photo-4.jpg" alt="Karabo Dlamini" class="avatar">
               <div class="employee-info">
-                <p><strong>Arthur Taylor</strong> <span>📈</span></p>
-                <p>Sales</p>
+                <p><strong>Karabo Dlamini</strong> <span>📈</span></p>
+                <p>Accountant</p>
               </div>
               <div class="employee-time">12m</div>
             </div>
         
             <div class="employee-item">
-              <img src="./images/photo-1.jpg" alt="Emma Wright" class="avatar">
+              <img src="./img/photo-1.jpg" alt="Zanele Khumalo" class="avatar">
               <div class="employee-info">
-                <p><strong>Emma Wright</strong> <span>📱</span></p>
-                <p>Operations Management</p>
+                <p><strong>Zanele Khumalo</strong> <span>📱</span></p>
+                <p>Marketing Specialist</p>
               </div>
               <div class="employee-time">8m</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+  </section>
+</main>
+  <!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
 
-  </main>
-    
-    <!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("/employees")
+        .then(response => response.json())
+        .then(data => {
+            let employeeSection = document.getElementById("employee-section");
+            employeeSection.innerHTML = data.map(emp => `
+                <p><strong>${emp.name}</strong> - ${emp.position} (${emp.department})</p>
+            `).join("");
+        });
+
+    fetch("/payroll")
+        .then(response => response.json())
+        .then(data => {
+            let payrollSection = document.getElementById("payroll-section");
+            payrollSection.innerHTML = data.map(payroll => `
+                <p>Days Worked: ${payroll.days_worked}</p>
+                <p>Leave Deductions: ${payroll.leave_deductions}</p>
+                <p>Final Salary: $${payroll.final_salary}</p>
+            `).join("");
+        });
+
+    fetch("/attendance")
+        .then(response => response.json())
+        .then(data => {
+            let attendanceSection = document.getElementById("attendance-section");
+            attendanceSection.innerHTML = `
+                <p>Present: ${data[0].total_present}</p>
+                <p>Absent: ${data[0].total_absent}</p>
+            `;
+        });
+
+    fetch("/timeoff")
+        .then(response => response.json())
+        .then(data => {
+            let timeOffSection = document.getElementById("timeoff-section");
+            timeOffSection.innerHTML = data.map(timeoff => `
+                <p>${timeoff.date} - ${timeoff.type} (${timeoff.status})</p>
+            `).join("");
+        });
+});
+
+</script>
 
 </body>
 </html>
